@@ -9,7 +9,7 @@ def main():
     :return: void
     """
     renameFiles()
-#    createSandbox()
+    createSandbox()
 
 
 def renameFiles():
@@ -18,7 +18,16 @@ def renameFiles():
 
     :return: void
     """
-    pass
+    print('Started renaming files...')
+    path = './Sandbox/'
+    files = os.listdir(path)
+    i = 0
+    for file in files:
+        os.rename(path + file, path + 'renamedFile' + str(i) + '.txt')
+        print('Renamed File: ' + os.path.basename(file) + ' to renamedFile' + str(i) + '.txt')
+        i += 1
+    print('Finished renaming files!')
+    print('Total renamed files: ' + str(i))
 
 
 def createSandbox():
@@ -28,11 +37,12 @@ def createSandbox():
     :return: void
     """
     print('Started setting up Sandbox...')
+    path = './Sandbox/'
     print('Started clearing the Sandbox directory...')
-    files = glob.glob('/Sandbox/*')
-    for file in files:
-        os.remove(file)
+    for file in os.listdir(path):
+        os.remove(os.path.join(path, file))
     print('Successfully cleared Sandbox directory!')
+    print('Started creating dummy files...')
     for x in range(0, 1000):
         open('./Sandbox/myData' + str(x) + '.txt', 'w')
     print('Sandbox successfully set up!')
