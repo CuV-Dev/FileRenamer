@@ -8,7 +8,7 @@ def main():
 
     :return: void
     """
-    renameFiles()
+#    renameFiles()
     createSandbox()
 
 
@@ -38,13 +38,22 @@ def createSandbox():
     """
     print('Started setting up Sandbox...')
     path = './Sandbox/'
-    print('Started clearing the Sandbox directory...')
-    for file in os.listdir(path):
-        os.remove(os.path.join(path, file))
-    print('Successfully cleared Sandbox directory!')
+    if os.path.exists(path[:-1]):
+        print('Started clearing the Sandbox directory...')
+        for file in os.listdir(path):
+            os.remove(os.path.join(path, file))
+        print('Successfully cleared Sandbox directory!')
+    else:
+        print('Creating Sandbox directory...')
+        try:
+            os.mkdir('./Sandbox')
+        except OSError as e:
+            print('Error while creating the Sandbox directory: ' + e)
+        print('Successfully created Sandbox directory!')
     print('Started creating dummy files...')
     for x in range(0, 1000):
         open('./Sandbox/myData' + str(x) + '.txt', 'w')
+    print('Finished creating dummy files!')
     print('Sandbox successfully set up!')
 
 
