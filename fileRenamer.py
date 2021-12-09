@@ -36,8 +36,12 @@ def renameFiles(path='./Sandbox/', new_name='renamedFile'):
     :param: new_name - The new name of the files. It will be followed by an incrementing number (Default: 'renamedFile')
     :return: void
     """
+    try:
+        files = os.listdir(path)
+    except OSError as e:
+        print('Der Pfad: ' + path + ' konnte nicht gefunden werden. Überprüfe den Pfad und prüfe die Zugriffsrechte.')
+        return
     print('Started renaming files...')
-    files = os.listdir(path)
     error_files = []
     i = 0
     for file in files:
